@@ -19,7 +19,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'info-box',
+  selector: 'app-info-box',
   templateUrl: './info-box.component.html',
   styleUrls: ['./info-box.component.scss']
 })

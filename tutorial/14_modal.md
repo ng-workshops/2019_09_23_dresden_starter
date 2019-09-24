@@ -44,7 +44,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ModalData } from './modal.model';
 
 @Component({
-  selector: 'modal',
+  selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
@@ -165,11 +165,11 @@ export class HomeComponent {
       this.hostElement
     );
 
-    modal.close.subscribe(_ => {
+    modal.close.subscribe(() => {
       console.log('MODAL closed');
     });
 
-    modal.cancel.subscribe(_ => {
+    modal.cancel.subscribe(() => {
       console.log('MODAL cancelled');
     });
   }

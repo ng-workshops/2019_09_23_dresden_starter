@@ -5,6 +5,13 @@
 ```ts
 ...
 
+providers: [
+SettingsService,
+{ provide: HttpClient, useValue: {} },
+HostElementService
+],
+
+
  it(`should have showDetails set to false`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app: AppComponent = fixture.debugElement.componentInstance;
@@ -141,4 +148,77 @@ beforeEach(async(() => {
   }));
 
 ...
+```
+
+## src/app/home/info-box/info-box.component.spec.ts
+
+```ts
+const listenerSubject = new Subject();
+const messageServiceMock = {
+  listener$: listenerSubject.asObservable()
+};
+
+beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    declarations: [InfoBoxComponent],
+    providers: [
+      {
+        provide: MessageService,
+        useValue: messageServiceMock
+      }
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
+  }).compileComponents();
+}));
+```
+
+## src/app/home/info-item/info-item.component.spec.ts
+
+```ts
+beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    imports: [FormsModule],
+    declarations: [InfoItemComponent]
+  }).compileComponents();
+}));
+```
+
+## shared/modal/modal.service.spec.ts
+
+```ts
+beforeEach(() => {
+  TestBed.configureTestingModule({
+    providers: [ModalService, HostElementService]
+  });
+});
+```
+
+## shared/modal/modal.component.spec.ts
+
+```ts
+beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    imports: [MatCardModule, MatButtonModule, NoopAnimationsModule],
+    declarations: [ModalComponent]
+  }).compileComponents();
+}));
+
+beforeEach(() => {
+  fixture = TestBed.createComponent(ModalComponent);
+  component = fixture.componentInstance;
+  component.modal = { title: 'test', message: 'tester', type: 'primary' };
+  fixture.detectChanges();
+});
+```
+
+## src/app/home/home.component.spec.ts
+
+```ts
+beforeEach(async(() => {
+  TestBed.configureTestingModule({
+    imports: [FormsModule, MatCardModule],
+    declarations: [HomeComponent, InfoBoxComponent, InfoItemComponent],
+    providers: [MessageService, HostElementService, ModalService]
+  }).compileComponents();
+}));
 ```
